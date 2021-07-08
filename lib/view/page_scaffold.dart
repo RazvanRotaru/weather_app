@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:weather_app/actions/get_current_weather.dart';
 import 'package:weather_app/actions/get_location.dart';
+import 'package:weather_app/locator.dart';
 import 'package:weather_app/models/app_state.dart';
 
 class PageScaffold extends StatelessWidget {
@@ -16,12 +17,14 @@ class PageScaffold extends StatelessWidget {
     '/',
     '/location',
     '/weather',
+    '/echo?text=ok'
   ];
 
   static List<dynamic> actions = <dynamic>[
     Object(),
     GetLocationAction(),
     GetCurrentWeatherAction(),
+    Object(),
   ];
 
   @override
@@ -36,10 +39,12 @@ class PageScaffold extends StatelessWidget {
         onTap: (int index) {
           final Store<AppState> store = StoreProvider.of<AppState>(context);
           store.dispatch(actions[index]);
-          Navigator.pushNamed(context, tabs[index]);
+          // Navigator.pushNamed(context, tabs[index]);
+          navigationService.navigateTo(tabs[index]);
         },
         currentIndex: index,
         showSelectedLabels: false,
+        backgroundColor: Colors.brown,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
@@ -52,6 +57,10 @@ class PageScaffold extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.wb_sunny),
             label: 'Weather',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.wysiwyg_outlined),
+            label: 'Echo',
           ),
         ],
       ),

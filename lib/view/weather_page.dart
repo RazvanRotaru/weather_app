@@ -19,14 +19,13 @@ class WeatherPage extends StatelessWidget {
               if (isLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
-              return weather == null
-                  ? const Center(child: Text('ce e null weather'))
-                  : Column(
-                      children: <Widget>[
-                        Text('${weather.temp} degrees'),
-                        Text('${weather.humidity}% humidity'),
-                      ],
-                    );
+              return Column(
+                children: <Widget>[
+                  Text('${weather!.temp} degrees'),
+                  Text('${weather.humidity}% humidity'),
+                  Text(weather.weather.first.main),
+                ],
+              );
             },
           );
         },

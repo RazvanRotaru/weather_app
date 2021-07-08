@@ -5,12 +5,13 @@ import 'package:redux/redux.dart';
 import 'package:weather_app/actions/get_location.dart';
 import 'package:weather_app/data/location_api.dart';
 import 'package:weather_app/data/weather_api.dart';
+import 'package:weather_app/locator.dart';
 import 'package:weather_app/middleware/location_middleware.dart';
 import 'package:weather_app/middleware/weather_middleware.dart';
 import 'package:weather_app/redux/redux.dart';
+import 'package:weather_app/routing/generate_route.dart';
 import 'package:weather_app/view/home_page.dart';
-import 'package:weather_app/view/location_page.dart';
-import 'package:weather_app/view/weather_page.dart';
+import 'locator.dart';
 
 import 'models/app_state.dart';
 
@@ -45,14 +46,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: const HomePage(),
         // theme: ThemeData.dark(),
-        routes: <String, WidgetBuilder>{
-          '/location': (BuildContext context) {
-            return const LocationPage();
-          },
-          '/weather': (BuildContext context) {
-            return const WeatherPage();
-          }
-        },
+        navigatorKey: navigationService.navigatorKey,
+        onGenerateRoute: generateRoute,
       ),
     );
   }
