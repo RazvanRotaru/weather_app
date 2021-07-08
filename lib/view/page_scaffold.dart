@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:redux/redux.dart';
-import 'package:weather_app/actions/get_current_weather.dart';
-import 'package:weather_app/actions/get_location.dart';
 import 'package:weather_app/locator.dart';
-import 'package:weather_app/models/app_state.dart';
 
 class PageScaffold extends StatelessWidget {
-  const PageScaffold({Key? key, required this.body, required this.index, required this.title}) : super(key: key);
+  const PageScaffold({Key key, this.body, this.index, this.title}) : super(key: key);
 
   final Widget body;
   final int index;
   final String title;
 
-  static List<String> tabs = <String>['/', '/location', '/weather', '/echo?text=ok'];
-
-  static List<dynamic> actions = <dynamic>[
-    Object(),
-    GetLocationAction(),
-    GetCurrentWeatherAction(),
-    Object(),
-  ];
+  static List<String> tabs = <String>['/', '/echo?text=ok'];
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +20,6 @@ class PageScaffold extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) {
-          final Store<AppState> store = StoreProvider.of<AppState>(context);
-          store.dispatch(actions[index]);
           // Navigator.pushNamed(context, tabs[index]);
           navigationService.navigateTo(tabs[index]);
         },
@@ -44,14 +30,6 @@ class PageScaffold extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_city),
-            label: 'Location',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.wb_sunny),
-            label: 'Weather',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.wysiwyg_outlined),

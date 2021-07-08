@@ -1,11 +1,9 @@
 import 'package:weather_app/routing/routing_data.dart';
 
-extension StringExtension on String {
-  RoutingData get routingData {
-    final Uri uri = Uri.parse(this);
+RoutingData routeData(String s) {
+  final Uri uri = Uri.parse(s);
 
-    print('query parameters: ${uri.queryParameters} path: ${uri.path}');
+  print('query parameters: ${uri.queryParameters} path: ${uri.path}');
 
-    return RoutingData(route: uri.path, query: uri.queryParameters);
-  }
+  return RoutingData(route: uri.path, query: uri.queryParameters);
 }
