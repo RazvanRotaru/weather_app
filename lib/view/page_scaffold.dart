@@ -13,12 +13,7 @@ class PageScaffold extends StatelessWidget {
   final int index;
   final String title;
 
-  static List<String> tabs = <String>[
-    '/',
-    '/location',
-    '/weather',
-    '/echo?text=ok'
-  ];
+  static List<String> tabs = <String>['/', '/location', '/weather', '/echo?text=ok'];
 
   static List<dynamic> actions = <dynamic>[
     Object(),
